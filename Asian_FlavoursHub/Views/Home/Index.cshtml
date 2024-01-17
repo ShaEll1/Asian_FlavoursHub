@@ -1,0 +1,178 @@
+﻿@model Asian_FlavoursHub.Models.DTOs.FoodDisplayModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="container-fluid">
+    <div id="imagePresentation" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                @* <div class="overlay"> *@
+                    <img src="/image/sl-food-1024x576.jpeg" class="d-block w-100" alt="Slide 1">
+                <div class="carousel-caption d-none d-md-block caption-top">
+                       <h3> Welcome To Asian-FlavoursHub</h3> 
+                       
+                    @* </div> *@
+                </div>
+            </div>
+        <div class="carousel-item">
+            @* <div class="overlay"> *@
+                <img src="/image/YT-FW-Jan-Blog.jpg" class="d-block w-100 " alt="Slide 2">
+                <div class="carousel-caption d-none d-md-block caption-bottom">
+                    <h3> Indulge in a culinary journey of flavors.</h3>
+                        </div>
+            @* </div> *@
+        </div>
+            <div class="carousel-item">
+                @* <div class="overlay"> *@
+                <img src="/image/Spice-2.jpg" class="d-block w-100" alt="Slide 3">
+                <div class="carousel-caption d-none d-md-block caption-top">
+                    <h3> Experience a symphony of tastes from Asia.</h3>
+                </div>
+                @* </div> *@
+            </div>
+            <div class="carousel-item">
+                @* <div class="overlay"> *@
+                <img src="/image/Hoppers.png" class="d-block w-100" alt="Slide 4">
+                <div class="carousel-caption d-none d-md-block caption-top">
+                    <h3> Order online for a convenient dining experience.</h3>
+                </div>
+                @* </div> *@
+            </div>
+            <div class="carousel-item">
+                @* <div class="overlay"> *@
+                <img src="/image/65489383-1024x768.jpg" class="d-block w-100" alt="Slide 5">
+                <div class="carousel-caption d-none d-md-block caption-bottom">
+                    <h3> Fuel your body with wholesome Asian dishes.</h3>
+                </div>
+                @* </div> *@
+            </div>
+            <div class="carousel-item">
+                @* <div class="overlay"> *@
+                <img src="/image/biryani.jpg" class="d-block w-100" alt="Slide 6">
+                <div class="carousel-caption d-none d-md-block caption-top">
+                    <h3> Explore the rich heritage of Asian cuisine.</h3>
+                </div>
+                @* </div> *@
+            </div>
+
+            <div class="carousel-item">
+                @* <div class="overlay"> *@
+                <img src="/image/intro-1683560012.jpg" class="d-block w-100" alt="Slide 7">
+                <div class="carousel-caption d-none d-md-block caption-bottom">
+                    <h3> Learn about the cultural influences behind our dishes.</h3>
+                </div>
+                @* </div> *@
+            </div>
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#imagePresentation" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#imagePresentation" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+    </div>
+    </div>
+
+@* <div class="text-center">
+    <h1 class="display-4">Asian-FlavoursHub. </h1>
+</div> *@
+
+</div>
+
+
+
+
+
+   
+
+<div class="w-100 mt-4 d-flex flex-wrap">
+    @foreach (var categoryGroup in Model.Foods.GroupBy(food => food.CategoryName))
+    {
+        <div class="container">
+            <h3 class="text-center">@categoryGroup.Key</h3>
+
+            <div class="card-group">
+                @foreach (var food in categoryGroup)
+                {
+                    <div class="card mx-3 mb-4" style=" min-width: 20rem; max-width: 20rem;">
+            @if (string.IsNullOrEmpty(food.Image))
+            {
+                <img style="width:100%; height:200px" src="" class="card-img-top" alt="..">
+            }
+            else
+            {
+                <img style="width:100%; height:200px" src="/image/@food.Image" class="card-img-top" alt="..">
+            }
+
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="@Url.Action("FoodDetails", "Home", new { foodId = food.Id })" >@food.FoodName</a>
+                </h5>
+                <p class="card-text">
+                    <h6 class="card-title">@food.CategoryName</h6>
+                    @* <p>@food.ShortDescription</p> *@
+                    <b>@food.Price kr<br></b>
+                    
+                </p>
+               
+               <button type="button" onclick="add(@food.Id)" class="btn btn-primary">Add to Cart</button>
+
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+@section Scripts{
+    <script>
+
+
+
+        async function add(foodId) {
+            var isAuthenticated = @(User.Identity.IsAuthenticated.ToString().ToLower());
+
+            if (!isAuthenticated) {
+                window.location.href = "/Identity/Account/Login";
+                return; // Stop further execution if not authenticated
+            }
+
+            try {
+                var response = await fetch(`/cart/AddItem?foodId=${foodId}`);
+                if (response.status === 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    if (cartCountEl) {
+                        cartCountEl.innerHTML = result;
+                        window.location.href = "#cartCount";
+                    }
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+       
+     
+
+        // Activate the carousel with a specified interval in milliseconds
+        var myCarousel = new bootstrap.Carousel(document.getElementById('imagePresentation'), {
+            interval: 4500, // the interval
+            wrap: true // false to wrap around when reaching the end
+        });
+    </script>
+}

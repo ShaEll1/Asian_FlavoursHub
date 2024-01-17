@@ -1,0 +1,68 @@
+﻿ @model Asian_FlavoursHub.Models.DTOs.AboutViewModel  
+
+
+
+
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Welcome to Asian Flavours Hub";
+}
+
+<div class="container mt-5">
+
+
+
+    <div class="text-center">
+        <h1>@ViewData["Title"]</h1>
+        <p>
+            Welcome to Asian Flavours Hub – your gateway to a culinary journey across the rich
+            and diverse cuisines of Sri Lanka, India, and Thailand!
+        </p>
+
+        <img src="/image/Spice-2.jpg" class="d-block w-100" alt="spices">
+    </div>
+
+    <div class="my-4">
+        <h5>Discover Authenticity:</h5>
+        <p>Immerse yourself in the authenticity of Sri Lankan, Indian, and Thai cuisines. From aromatic curries to flavorful spices, our curated selection of dishes captures the essence of each culture, allowing you to savor the true taste of Asia without leaving your home.</p>
+    </div>
+
+    <div class="my-4">
+        <h5>Grocery Delights:</h5>
+        <p>Embark on a culinary adventure in your own kitchen with our extensive grocery section. Find all the ingredients you need to recreate your favorite dishes at home. Whether you're a seasoned chef or a passionate home cook, our collection includes rare and essential Asian ingredients that might be hard to find elsewhere.</p>
+    </div>
+
+    <div class="my-4">
+        <h5>Recipes at Your Fingertips:</h5>
+        <p>Unleash your inner chef with our collection of carefully curated recipes. Each recipe is a culinary masterpiece, bringing the authentic flavors of Sri Lankan, Indian, and Thai cuisines to your dining table. What sets us apart is the convenience we offer – each recipe comes with a one-click option to add all the necessary ingredients directly to your cart. This ensures that you have everything you need to create a delectable dish, hassle-free. Elevate your cooking skills and dive into the magic of Asian cuisine from the comfort of your home.</p>
+    </div>
+
+    <div class="my-4">
+        <h5>The Best of Both Worlds:</h5>
+        <p>Asian Flavours Hub is not just a marketplace; it's a community. Join a community of food enthusiasts, share your culinary creations, and connect with like-minded individuals who share a passion for Asian cuisine. Discover new flavors, exchange cooking tips, and be a part of the Asian Flavours Hub family.</p>
+    </div>
+
+    <div class="my-4">
+        <h5>Your Culinary Adventure Begins Here:</h5>
+        <p>Whether you're a lover of spicy curries, aromatic rice dishes, or exotic Thai flavors, Asian Flavours Hub is your go-to destination for all things Asian cuisine. Join us on a gastronomic journey that celebrates the diversity and richness of flavors that make Asian food truly extraordinary.</p>
+        <p>Experience the taste of tradition, the joy of cooking, and the convenience of online shopping—all at Asian Flavours Hub. Welcome to a world of culinary delights!</p>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-toggle').each(function () {
+                new bootstrap.Dropdown(this);
+            });
+        });
+    </script>
+}

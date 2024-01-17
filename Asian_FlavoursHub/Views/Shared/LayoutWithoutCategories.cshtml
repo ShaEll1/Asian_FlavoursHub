@@ -1,0 +1,101 @@
+﻿
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Asian-Flavours</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <!-- Add jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Add jQuery Validation -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+    <!-- Add jQuery Unobtrusive Validation -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation.unobtrusive/latest/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/Home/Index">Asian_FlavoursHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/Home/Index">
+                            Home
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/About">About</a>
+                    </li>
+                    @*  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                    <div class="dropdown-menu">
+                    @if (Model != null && Model.Categories != null)
+                    @foreach (var category in Model.Categories)
+                    {
+                    <a class="dropdown-item" href="/Home/Index?categoryId=@category.Id">@category.CategoryName</a>
+                    }
+                    </div>
+                    </li> *@
+                </ul>
+
+                <form class="d-flex" method="get" asp-controller="Home" asp-action="Index">
+                    <input class="form-control me-sm-2" type="search" name="sterm" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+
+                </form>
+
+
+                <partial name="_LoginPartial" />
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+
+
+
+    <footer class="navbar navbar-expand-lg bg-primary text-light">
+        <div class="container d-flex justify-content-center">
+            <div class="footer-content text-center">
+                <p class="copyright">Asian-FlavoursHub © 2023</p>
+                <p class="contact-info">
+                    <a href="/Home/Contact" class="footer-link" style="text-decoration: none; color: white;">Contact Us</a>
+
+                <p class="follow-us">Follow us on Social Media</p>
+
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank"><i class="bi bi-facebook" style="color: white;"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="bi bi-instagram" style="margin-left: 20px;color: white;"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+</body>
+</html>
+
+
+
+

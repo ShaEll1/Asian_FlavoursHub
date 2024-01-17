@@ -1,0 +1,70 @@
+﻿@model Asian_FlavoursHub.Models.DTOs.ContactViewModel
+
+
+
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Contact Us";
+}
+
+<div class="container mt-5 mb-5">
+
+
+
+    <div class="text-center">
+        <h3>@ViewData["Title"]</h3>
+        <p>
+            Welcome to Asian Flavours Hub – your gateway to a culinary journey across the rich
+            and diverse cuisines of Sri Lanka, India, and Thailand! </p>
+    </div>
+    <br />
+        <b><p> Address: Västra Järnvägsgatan 3, 371 64 Karlskrona</p>
+
+        <p>Tel. 072-451 87 52</p>
+
+        <p>E-mail: info@asian_flavourshub.com</p>
+    </b>
+    <br />
+        <p>Do you have requests, questions, or opinions?</p>
+        <p>Feel free to send us a message:</p> 
+
+        
+
+
+    @using (Html.BeginForm("SendEmail", "Home", FormMethod.Post, new { id = "contactForm" }))
+    {
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required />
+            </div>
+    <div class="form-group">
+        <label for="email">Your Email:</label>
+        <input type="email" class="form-control" id="email" name="email" required />
+    </div>
+    <div class="form-group">
+        <label for="subject">Subject:</label>
+        <input type="text" class="form-control" id="subject" name="subject" required />
+    </div>
+    <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea class="form-control" id="message" name="message" required></textarea>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Send</button>
+    }
+
+        </div>
+
+
+<script>
+    function submitForm() {
+        
+
+        // reset the form 
+        document.getElementById("contactForm").reset();
+
+        //  redirect to the same page 
+        window.location.href = "/Home/Contact";
+    }
+</script>

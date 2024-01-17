@@ -1,0 +1,71 @@
+﻿@model ShoppingCart
+@{
+    ViewData["Title"] = "GetUserCart";
+}
+<div style=" width:90%;margin:auto" class="mt-2">
+    @if (Model != null && Model.CartDetails !=null && Model.CartDetails.Count > 0)
+{
+    
+
+
+    <h4>My Cart</h4>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Food</th>
+            <th>Category</th>
+            <th>Unit Price</th>
+            <th>Qty</th>
+            <th>Total Price</th>
+             <th>Action</th>
+        </tr>
+            @foreach (var item in Model.CartDetails ?? Enumerable.Empty<CartDetails>())
+            {
+            <tr>
+                <td>@item.Food.FoodName</td>
+               <td>@item.Food.Category.CategoryName</td>
+                    <td>@item.Food.Price</td>
+                    <td> @item.Quantity</td>
+                <td>@(item.Food.Price*item.Quantity)</td>
+                <td>
+                    <a class="btn btn-info" href="/Cart/AddItem?foodId=@item.FoodId&&redirect=1">+</a>
+                    <a class="btn btn-info" href="/Cart/removeitem?foodid=@item.FoodId">-</a>
+                </td>
+                                
+            </tr>
+        }
+        </table>
+        <div class="my-2"> 
+            <h5>Total (SEK) : 
+                @(Model.CartDetails?.Select(item => item.Food?.Price * item.Quantity)?.Sum() ?? 0)
+            </h5>
+            @* @(Model.CartDetails.Select(item=>item.Food.Price*item.Quantity).Sum()) *@
+            </div>
+
+        <div class="my-2">
+           @*  <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("UserOrders", "UserOrder")'">Checkout</button> *@
+
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Checkout", "Cart")'">Checkout</button>
+             @* <a id="checkoutButton" href="/Views/UserOrder/UserOrders">Checkout</a>  *@
+ 
+
+        </div>
+
+
+
+    }
+    else
+    {
+        <h5>Your Cart is Empty</h5>
+    }
+</div>
+
+@* @if (ViewData["CheckoutFailed"] != null && (bool)ViewData["CheckoutFailed"])
+{
+    <div>
+        <p>Checkout failed. Please try again or contact support.</p>
+        
+    </div>
+} *@
+
+

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Order>
+@{
+    Layout = "~/Views/Shared/LayoutWithoutCategories.cshtml";
+    ViewData["Title"] = "GetUserCart";
+}
+
+<div class="container mt-4">
+    <a href="/Identity/Account/Manage" class="btn btn-primary">Back</a>
+    <h4 class="mt-3 mb-4">My Orders</h4>
+
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var order in Model)
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <strong>Order Date:</strong> @order.CreatedAt.ToString("dd-MM-yyyy") |
+                    <strong>Order Status:</strong> @order.OrderStatus.StatusName
+                </div>
+                <div class="card-body">
+                    @if (order.OrderDetails != null && order.OrderDetails.Any())
+                    {
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Food</th>
+                                    <th>Category</th>
+                                    <th>Unit Price</th>
+                                    <th>Qty</th>
+                                    <th>Total Price</th>
+                                    @* <th>Action</th> *@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in order.OrderDetails)
+                                {
+                                    <tr>
+                                        <td>@item.Food.FoodName</td>
+                                        <td>@item.Food.Category.CategoryName</td>
+                                        <td>@item.Food.Price</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@(item.Food.Price * item.Quantity)</td>
+                                        @* <td>Action Button</td> *@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="text-end">
+                            <strong>Total:</strong> @order.OrderDetails.Sum(item => item.Food.Price * item.Quantity)
+                        </div>
+                    }
+                    else
+                    {
+                        <p>No items in this order.</p>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h5>No Orders Found</h5>
+    }
+</div>
